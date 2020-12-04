@@ -9,6 +9,7 @@
     "start": "node dist/app.js"
   },
   "dependencies": {
+    "moment": "^2.29.1",
     "node-tesseract-ocr": "^2.0.0",
     "nodemon": "^2.0.6",
     "puppeteer": "^5.5.0",
