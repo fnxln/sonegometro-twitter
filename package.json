@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "build": "yarn tsc",
+    "run": "yarn tsc && yarn dist/index.js"
+  },
   "dependencies": {
     "nodemon": "^2.0.6",
     "puppeteer": "^5.5.0",
