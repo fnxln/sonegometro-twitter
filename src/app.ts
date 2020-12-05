@@ -6,6 +6,7 @@ import moment from 'moment';
 import dotenv from 'dotenv';
 import twit from 'twit';
 import Intl from 'intl';
+import cron, { CronJob } from 'cron';
 import { isElementAccessExpression } from 'typescript';
 //date stuff
 moment.locale('pt-br');
@@ -13,16 +14,15 @@ const hora = moment().format('LL');
 console.log(hora);
 //twitter api
 var T = new twit({
-  consumer_key:         process.env.consumer_key ?? '',
-  consumer_secret:      process.env.consumer_secret ?? '',
-  access_token:         process.env.access_token ?? '',
-  access_token_secret:  process.env.access_token_secret ?? '',
+  consumer_key:         '',
+  consumer_secret:      '',
+  access_token:         '',
+  access_token_secret:  '',
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
   strictSSL:            true,     // optional - requires SSL certificates to be valid.
 });
 
-
-
+var job = new CronJob('* * * * * *', function() {
 
 // puppeteer stuff
 (async () => {
@@ -75,23 +75,22 @@ const worker = createWorker();
     var formatter = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
   currency: 'BRL',
-
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
  /* $2,500.00 */
-console.log(formatter.format(dindin));
-  //     T.post('statuses/update', { status: dindinstring }, function(err, data, response) {
-  // console.log(data);
+ let dindinstring = formatter.format(dindin);
+  console.log(formatter.format(dindin));
+      T.post('statuses/update', { status: ('Hoje, \n' + hora + '\nForam salvos: \n' + dindinstring + ' \nDa mao do estado que podem ser usados na circulação da economia') }, function(err, data, response) {
+  console.log(data);
   
-  //     }
+      }
   
-      // );
+      );
   }
   
 
 
   await worker.terminate();
 })();
+}, null, true, 'America/Los_Angeles');
+job.start();
