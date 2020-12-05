@@ -2,10 +2,27 @@ import puppeteer from 'puppeteer';
 import os from 'os';
 import { createWorker  }  from 'tesseract.js';
 import moment from 'moment';
+import twitter from 'twitter';
+import dotenv from 'dotenv';
+
+//date stuff
 moment.locale('pt-br');
 const hora = moment().format('LL'); 
 console.log(hora);
+//twitter api
+let client = new twitter({
+  consumer_key: '',
+  consumer_secret: '',
+  bearer_token: ''
+});
 
+
+
+
+
+
+
+// puppeteer stuff
 (async () => {
     const browser = await puppeteer.launch(); 
     const page = await browser.newPage();
@@ -25,6 +42,10 @@ console.log(hora);
     
   })();
 
+
+
+
+  // tesseract stuff
 const worker = createWorker();
 
 (async () => {
