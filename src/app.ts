@@ -12,7 +12,7 @@ import { isElementAccessExpression } from 'typescript';
 moment.locale('pt-br');
 const hora = moment().format('LL'); 
 console.log(hora);
-//twitter api
+// twitter api
 var T = new twit({
   consumer_key:         '',
   consumer_secret:      '',
@@ -65,10 +65,11 @@ const worker = createWorker();
   let linhas = text.split('\n');
   linhas.splice(0,1);
   let textofinal = linhas.join('\n')
-  if (textofinal.length <= 12){
+  textofinal = textofinal.substring(0, textofinal.length - 3);
+  if (textofinal.length != 12){
     console.log('A porra do tesseract bugou o tamanho da string foi de: ' + textofinal.length + ' Caracteres, aguarde a proxima run')
   }
-  if (textofinal.length >= 12){
+  if (textofinal.length == 12){
     console.log('Dados:');
     console.log(textofinal);
     let dindin = parseInt(textofinal);
