@@ -22,7 +22,7 @@ var T = new twit({
   strictSSL:            true,     // optional - requires SSL certificates to be valid.
 });
 
-var job = new CronJob('* * * * * *', function() {
+var job = new CronJob('0 */2 * * *', function() {
 
 // puppeteer stuff
 (async () => {
